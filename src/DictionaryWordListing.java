@@ -73,8 +73,9 @@ public class DictionaryWordListing {
                     break;
         }
     }
+
     public static void original(String[] list) {
-        System.out.println(Arrays.toString(list));
+            System.out.println(Arrays.toString(list));
     }
 
     public static void bubbleSort(String[] list, String order) {
