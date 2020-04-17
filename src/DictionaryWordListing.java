@@ -24,18 +24,79 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class DictionaryWordListing {
-    String[] tenWords = new String[10];
-    Scanner inputWord = new Scanner(System.in);
+        public static void main(String[] args) {
+            int userInput;
+            String[] tenWords = new String[10];
+            Scanner inputWord = new Scanner(System.in);
+            System.out.println("Let's make a dictionary! Give me 10 words.");
+            System.out.println("Enter a word (1/10): ");
+            tenWords[0] = inputWord.nextLine();
 
-    public void main(String[] args) {
-        System.out.println("Let's make a dictionary! Give me 10 words.");
-        for (int i = 0; i < 10; i += 1) {
-            System.out.printf("Enter a word (%d/10): ", i);
-            tenWords[i] = inputWord.next();
+            for (int i = 1; i < 10; i += 1) {
+                System.out.printf("Enter a word (%d/10): ", i + 1);
+                tenWords[i] = inputWord.nextLine();
+            }
+//            inputWord.nextLine();
+
+
+            System.out.println("How would you like to view your dictionary?\n" +
+                    "Enter '0' to quit.\n" +
+                    "Enter '1' for Original Order.\n" +
+                    "Enter '2' for Alphabetical Order.\n" +
+                    "Enter '3' for Reversed Alphabetical Order.");
+            userInput = inputWord.nextInt();
+
+            switch (userInput) {
+                case 0:
+                    System.exit(1);
+                    break;
+                case 1:
+                    System.out.println("Here is your dictionary in Original Order: ");
+                    original(tenWords);
+                    break;
+                case 2:
+                    System.out.println("Here is your dictionary in Alphabetical Order: ");
+                    bubbleSort(tenWords, "abc");
+                    break;
+                case 3:
+                    System.out.println("Here is your dictionary in Reversed Alphabetical Order: ");
+                    bubbleSort(tenWords, "zyx");
+                    break;
         }
-        System.out.println("How would you like to view your dictionary?\n" +
-                "Enter '1' for Original Order\n" +
-                "Enter '2' for Alphabetical Order\n" +
-                "Enter '3' for Reversed Alphabetical Order\n");
+
+
     }
+    public static void original(String[] list) {
+        System.out.println(Arrays.toString(list));
+    }
+
+    public static void bubbleSort(String[] list, String order) {
+        String temp;
+        int length = list.length;
+        String nextWord, thisWord;
+
+        for (int i = 0; i < list.length - 1; i++) {
+            for (int k= 0; k < list.length - i - 1; k++) {
+                nextWord = list[k + 1];
+                thisWord = list[k];
+                if (order.equals("abc")) {
+                    if (nextWord.compareTo(thisWord) < 0) {
+                        temp = thisWord;
+                        list[k] = nextWord;
+                        list[k + 1] = temp;
+                    }
+                } else {
+                    if (thisWord.compareTo(nextWord) < 0) {
+                        temp = nextWord;
+                        list[k] = thisWord;
+                        list[k + 1] = temp;
+                    }
+                }
+
+            }
+        }
+        System.out.println(Arrays.toString(list));
+    }
+
+
 }
